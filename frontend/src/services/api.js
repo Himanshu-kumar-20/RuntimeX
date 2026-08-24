@@ -1,4 +1,5 @@
-const API_BASE = '/api';
+// Use relative /api in production on Vercel or VITE_API_BASE_URL if configured
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '') + '/api';
 
 export async function checkHealth() {
   try {

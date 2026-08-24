@@ -10,6 +10,16 @@ pip-log.txt
 pip-delete-this-directory.txt
 .venv/
 .env
+api/__pycache__/
+
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.venv/
+.env
 
 # Node / Frontend
 node_modules/

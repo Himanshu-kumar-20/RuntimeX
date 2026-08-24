@@ -3,6 +3,7 @@ import re
 import shutil
 import uuid
 import zipfile
+import tempfile
 import requests
 import subprocess
 from typing import Dict, Optional, Generator
@@ -103,9 +104,8 @@ def temp_repository(github_url: str) -> Generator[Dict, None, None]:
     owner = repo_info["owner"]
     name = repo_info["name"]
     
-    # Create temp directory inside workspace
-    workspace_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    temp_root = os.path.join(workspace_root, "temp_clones")
+    # Use system temp directory (works seamlessly on Vercel /tmp as well as local)
+    temp_root = os.path.join(tempfile.gettempdir(), "runtimex_clones")
     os.makedirs(temp_root, exist_ok=True)
     
     unique_id = str(uuid.uuid4())
