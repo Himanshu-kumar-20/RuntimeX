@@ -1,0 +1,100 @@
+:root {
+  /* ─────────────── BACKGROUNDS ─────────────── */
+  --bg-pure:          #010203;
+  --bg-terminal:      #050d08;
+  --bg-panel:         #070f0a;
+  --bg-panel-hover:   #0c1a10;
+  --bg-code:          #040a05;
+  --bg-titlebar:      #020604;
+  --bg-input:         #020504;
+  --bg-footer:        #020604;
+
+  /* ─────────────── PHOSPHOR GREEN ─────────────── */
+  --green-bright:     #3dff82;
+  --green-primary:    #28d668;
+  --green-mid:        #1ea850;
+  --green-dim:        #167538;
+  --green-dark:       #0c4422;
+  --green-muted:      #4d8a5e;
+  --green-faint:      #1d3626;
+  --green-glow:       rgba(61, 255, 130, 0.20);
+  --green-glow-s:     rgba(61, 255, 130, 0.45);
+
+  /* ─────────────── CYAN (Technical/Info) ─────────────── */
+  --cyan-bright:      #22ffe4;
+  --cyan-mid:         #14c4ae;
+  --cyan-dim:         #0a7d6f;
+  --cyan-glow:        rgba(34, 255, 228, 0.18);
+
+  /* ─────────────── AMBER (Demo/Warning) ─────────────── */
+  --amber-bright:     #ffc93d;
+  --amber-mid:        #d4a020;
+  --amber-dim:        #7a5b0e;
+  --amber-glow:       rgba(255, 201, 61, 0.22);
+
+  /* ─────────────── RED (High Severity) ─────────────── */
+  --red-bright:       #ff4f6a;
+  --red-mid:          #d43050;
+  --red-dim:          #7a1225;
+  --red-glow:         rgba(255, 79, 106, 0.20);
+
+  /* ─────────────── PURPLE / MAGENTA (Memory & Images) ─────────────── */
+  --purple-bright:    #d46bff;
+  --purple-mid:       #b84fe0;
+  --purple-dim:       #6d208c;
+  --purple-glow:      rgba(212, 107, 255, 0.22);
+  --magenta-bright:   #ff52cf;
+  --magenta-mid:      #d938aa;
+  --magenta-dim:      #7d155e;
+  --magenta-glow:     rgba(255, 82, 207, 0.22);
+
+  /* ─────────────── TEXT HIERARCHY ─────────────── */
+  --text-h1:          #f0fff5;       /* max contrast headings   */
+  --text-h2:          #c8f0d8;       /* section headings        */
+  --text-body:        #8ecfa1;       /* default body            */
+  --text-secondary:   #567c63;       /* labels, meta            */
+  --text-dim:         #2e5238;       /* very quiet text         */
+
+  /* ─────────────── BORDERS ─────────────── */
+  --border-faint:     #0d2414;
+  --border-subtle:    #163d22;
+  --border-mid:       #255c35;
+  --border-active:    #28d668;
+  --border-bright:    #3dff82;
+
+  /* ─────────────── TYPOGRAPHY ─────────────── */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+               'Source Code Pro', 'Courier New', monospace;
+}
+
+/* ─── Global Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-pure);
+  color: var(--text-body);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Phosphor Scrollbars ─── */
+::-webkit-scrollbar              { width: 6px; height: 6px; }
+::-webkit-scrollbar-track        { background: var(--bg-pure); }
+::-webkit-scrollbar-thumb        { background: var(--green-dim); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--green-mid); box-shadow: 0 0 8px var(--green-glow); }
+
+/* ─── Selection ─── */
+::selection { background: var(--green-bright); color: #000; }
+
+/* ─── Code defaults ─── */
+code, pre, kbd, samp    { font-family: var(--font-mono); }
+button, input, textarea, select { font-family: var(--font-mono); }
