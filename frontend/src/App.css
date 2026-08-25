@@ -1236,13 +1236,15 @@
   padding: 10px 14px;
   border-radius: 3px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .issue-code-pre {
   font-size: 12px;
   color: var(--green-mid);
-  white-space: pre-wrap;
-  word-break: break-all;
+  white-space: pre;
+  word-break: normal;
   line-height: 1.5;
 }
 
@@ -1442,6 +1444,9 @@
   border-radius: 3px;
   max-height: 260px;
   overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .diff-code-wrapper.wrapper-fixed { border-color: var(--green-dark); }
@@ -1449,7 +1454,8 @@
 .diff-code-pre {
   font-size: 12px;
   color: #78db94;
-  white-space: pre-wrap;
+  white-space: pre;
+  word-break: normal;
   line-height: 1.6;
 }
 
@@ -1682,22 +1688,444 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE & MOBILE BREAKPOINTS (320px – 768px)
    ═══════════════════════════════════════════════════════════════ */
 
-@media (max-width: 960px) {
-  .score-overview-terminal { grid-template-columns: 1fr; }
-  .overview-meter-col { min-width: auto; }
-  .crt-meter-score-huge { font-size: 64px; }
-  .category-meter-row { grid-template-columns: 90px 1fr 50px; }
-  .category-meter-row .cat-status-tag,
-  .category-meter-row .cat-issue-count { display: none; }
+/* Global code horizontal scroll safety */
+.issue-code-box,
+.diff-code-wrapper {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
+.issue-code-pre,
+.diff-code-pre {
+  white-space: pre !important;
+  word-break: normal !important;
+}
+
+/* --- Desktop / Large Tablet (<= 960px) --- */
+@media (max-width: 960px) {
+  .score-overview-terminal {
+    grid-template-columns: 1fr;
+    padding: 20px 22px;
+  }
+
+  .overview-meter-col {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .crt-meter-score-huge {
+    font-size: clamp(54px, 14vw, 80px);
+  }
+
+  .category-meter-row {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "catname catstatus catscore"
+      "catbar catbar catbar"
+      "catcount catcount catcount";
+    gap: 6px 10px;
+    padding: 10px 12px;
+  }
+
+  .cat-name { grid-area: catname; }
+  .cat-status-tag { grid-area: catstatus; display: inline-block !important; text-align: left; justify-self: start; }
+  .cat-score-val { grid-area: catscore; text-align: right; }
+  .cat-bar-container { grid-area: catbar; width: 100%; margin: 2px 0; }
+  .cat-issue-count { grid-area: catcount; display: inline-block !important; text-align: right; font-size: 10.5px; opacity: 0.85; }
+}
+
+/* --- Tablet Portrait / Mobile (<= 768px) --- */
+@media (max-width: 768px) {
+  .terminal-workspace {
+    padding: 12px 12px 40px;
+  }
+
+  .terminal-titlebar {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .titlebar-path {
+    font-size: 11.5px;
+  }
+
+  .titlebar-right {
+    gap: 6px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .btn-terminal-nav {
+    padding: 4px 8px;
+    font-size: 10.5px;
+  }
+
+  .terminal-body {
+    padding: 18px 16px;
+    gap: 20px;
+  }
+
+  .terminal-hero {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .diff-grid-terminal,
+  .report-diff-grid,
+  .report-score-row {
+    grid-template-columns: 1fr;
+  }
+
+  .report-document-paper {
+    padding: 20px 18px;
+  }
+}
+
+/* --- Mobile Standard (<= 640px) --- */
 @media (max-width: 640px) {
-  .terminal-body { padding: 16px 18px; }
-  .terminal-opt-panel { flex-direction: column; align-items: flex-start; }
-  .diff-grid-terminal { grid-template-columns: 1fr; }
+  .terminal-workspace {
+    padding: 8px 8px 30px;
+  }
+
+  .terminal-window {
+    border-radius: 4px;
+  }
+
+  .terminal-body {
+    padding: 14px 12px;
+    gap: 16px;
+  }
+
+  /* Titlebar adjustments */
+  .titlebar-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  /* CLI Input wrapper */
+  .cli-input-wrapper {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .cli-prefix {
+    padding-right: 4px;
+  }
+
+  .cli-text-input {
+    flex: 1 1 180px;
+    width: auto;
+    padding: 8px 0;
+  }
+
+  .btn-terminal-exec {
+    width: 100%;
+    min-height: 42px;
+    height: 42px;
+    justify-content: center;
+  }
+
+  /* Presets */
+  .terminal-presets {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-preset {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+
+  /* 5 Category Meters list on Mobile */
+  .category-terminal-panel {
+    padding: 16px 14px;
+  }
+
+  /* Optimization Panel */
+  .terminal-opt-panel {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
+  .opt-action-right {
+    width: 100%;
+  }
+
+  .btn-opt-exec,
+  .btn-opt-reset {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+
+  /* Grep search & Filters */
+  .issues-cmd-bar {
+    padding: 14px 12px;
+  }
+
+  .search-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .grep-search-box {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .filter-switches-row {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .btn-switch {
+    padding: 5px 8px;
+    font-size: 10.5px;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  /* Issue Cards */
+  .issue-terminal-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+
+  .issue-card-top-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .issue-file-location {
+    font-size: 10.5px;
+  }
+
+  .issue-bottom-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .issue-btn-group {
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .btn-card-apply,
+  .btn-card-view {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+
+  /* Modals */
+  .terminal-modal-backdrop {
+    padding: 8px;
+  }
+
+  .terminal-modal-window {
+    max-height: 96vh;
+    border-radius: 4px;
+  }
+
+  .terminal-modal-header {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .terminal-modal-body {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .terminal-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .btn-modal-copy,
+  .btn-modal-apply {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Mobile Small / Extra Small (320px – 480px) --- */
+@media (max-width: 480px) {
+  .terminal-workspace {
+    padding: 4px 4px 20px;
+  }
+
+  .terminal-window {
+    border-width: 1px 0;
+    border-radius: 0;
+  }
+
+  .path-host {
+    font-size: 11px;
+  }
+
+  .repo-spec-table {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+
+  .spec-key {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .spec-key:first-child {
+    margin-top: 0;
+  }
+
+  .spec-val, .spec-val-highlight {
+    font-size: 11.5px;
+    word-break: break-all;
+  }
+
+  .crt-meter-score-huge {
+    font-size: clamp(42px, 18vw, 64px);
+  }
+
+  .overview-meter-col {
+    padding: 18px 16px;
+  }
+
+  .fix-all-overlay-card,
+  .terminal-reanalyze-card {
+    padding: 18px 14px !important;
+  }
+
+  .reanalyze-score-delta-box {
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .score-col-old,
+  .score-col-new {
+    font-size: 38px;
+  }
+
+  .fix-summary-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .report-document-paper {
+    padding: 14px 10px;
+  }
+
+  .report-brand-title {
+    font-size: 20px;
+  }
+
+  .report-spec-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-pillar-row {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "name tag score"
+      "bar bar bar";
+    gap: 4px 6px;
+    padding: 8px;
+  }
+
+  .pillar-name { grid-area: name; font-size: 10.5px; }
+  .pillar-tag { grid-area: tag; justify-self: start; font-size: 9px; }
+  .pillar-score-val { grid-area: score; text-align: right; font-size: 11px; }
+  .pillar-bar-track { grid-area: bar; width: 100%; margin-top: 2px; }
+
+  /* Brand logo on tiny screens */
+  .brand-logo-svg {
+    max-width: 100%;
+  }
+
+  .brand-subtitle-row {
+    letter-spacing: 0.8px;
+    font-size: 10px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .brand-telemetry-pill {
+    font-size: 9px;
+  }
+
+  /* Hero sys-info chips — stack if needed */
+  .hero-sys-info {
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 10.5px;
+  }
+
+  .sys-info-item {
+    gap: 4px;
+  }
+
+  /* Score overview header on 320px */
+  .score-overview-terminal {
+    padding: 14px 12px;
+  }
+
+  .score-overview-terminal .terminal-prompt-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  /* Severity breakdown chips on tiny screens */
+  .severity-counts-row {
+    gap: 6px;
+  }
+
+  .sev-chip {
+    font-size: 10.5px;
+    padding: 4px 8px;
+  }
+
+  /* Fix All Overlay — step list on tiny screen */
+  .fix-all-steps-list {
+    padding: 10px 12px;
+  }
+
+  .fix-step-item {
+    font-size: 11.5px;
+  }
+
+  /* Footer */
+  .terminal-footer {
+    padding: 10px 12px;
+    font-size: 10px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-tags {
+    flex-wrap: wrap;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════

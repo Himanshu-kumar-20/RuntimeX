@@ -98,3 +98,15 @@ html, body {
 /* ─── Code defaults ─── */
 code, pre, kbd, samp    { font-family: var(--font-mono); }
 button, input, textarea, select { font-family: var(--font-mono); }
+
+/* ─── Mobile-safe overflow containment ─── */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+#root {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
